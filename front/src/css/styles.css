@@ -1,0 +1,388 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Open Sans", sans-serif;
+}
+
+.main-content {
+    padding-bottom: 50px; /* Ajuste la valeur en fonction de la hauteur du footer */
+}
+
+.header-area {
+    text-align: center;
+    position: relative;
+    z-index: 1; /* Assure que le header est au-dessus de la section d'image */
+    background-color: #222;
+    color: white;
+}
+
+.top-header-area {
+    display: flex;
+    justify-content: space-between; /* Aligne les éléments de manière à ce qu'ils soient répartis entre les bords gauche et droit */
+    align-items: center; /* Centre les éléments verticalement */
+}
+
+.mail a {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    padding: 50px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.phone-container {
+    display: flex; /* Aligne les éléments horizontalement */
+    align-items: center; /* Centre les éléments verticalement */
+}
+
+.phone-call {
+    padding-top: 11px;
+    padding-right: 15px;
+    padding-bottom: 6px;
+    padding-left: 15px;
+}
+
+.phone-number a {
+    color: white;
+    background-color: #947054;
+    padding-top: 15px;
+    padding-right: 70px;
+    padding-bottom: 13px;
+    padding-left: 70px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.bottom-header {
+    background-color: #333;
+
+    display: flex; /* Utiliser flexbox pour la mise en page */
+    justify-content: space-between; /* Espacer les éléments à gauche et à droite */
+    align-items: center; /* Centrer les éléments verticalement */
+}
+
+.custom-carousel-img {
+    max-width: 100%; /* Par exemple, pour que l'image occupe au maximum 50% de la largeur du conteneur */
+    height: auto; /* Conserver les proportions de l'image */
+    margin: 0px auto; /* Centrer l'image horizontalement */
+}
+
+.logo img {
+    max-height: 120px; /* Ajustez la hauteur maximale du logo */
+    height: auto; /* Conserve le ratio d'aspect original */
+    width: auto; /* Ajuste la largeur proportionnellement */
+    margin-top: -12px;
+    margin-bottom: -16px;
+    margin-right: 50px; /* Espace entre le logo et le texte de navigation */
+    display: inline-block; /* Assure que l'image reste en ligne avec les autres éléments */
+}
+
+.bottom-header ul {
+    list-style-type: none;
+    display: flex; /* Assure que les éléments sont alignés horizontalement */
+    justify-content: center; /* Centre les éléments horizontalement */
+    flex: 1; /* Permet aux liens de prendre tout l'espace disponible */
+    transition: color 0.3s;
+}
+
+.bottom-header ul li a:hover {
+    color: #947054;
+    text-decoration: none;
+}
+
+.bottom-header li {
+    margin-right: 40px; /* Espace entre les liens */
+}
+
+.bottom-header a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 30px;
+
+    padding: 0 12px;
+    line-height: 35px; /* Centrer verticalement */
+    display: inline-block; /* Assure que les éléments restent en ligne */
+    height: 35px; /* Ajuste la hauteur des éléments */
+}
+
+.carousel-container {
+    position: relative; /* Nécessaire pour positionner les boutons par rapport au conteneur */
+}
+
+.carousel-item {
+    position: relative;
+    max-height: 70vh; /* Limite la hauteur du carousel */
+    overflow: hidden;
+}
+
+.carousel-item img {
+    object-fit: cover; /* Assure que l'image couvre tout le conteneur */
+    width: 100%;
+    height: 90vh; /* Hauteur définie pour toutes les images */
+}
+
+.carousel-caption {
+    position: absolute;
+    bottom: 50px; /* Positionne la légende en bas */
+    left: 50px; /* Espace de 50px à gauche */
+    right: auto;
+    text-align: left; /* Aligne le texte à gauche */
+}
+
+.carousel-caption h5 {
+    font-size: 3rem; /* Taille de police du titre */
+    font-weight: 700; /* Gras pour le titre */
+    color: #fff; /* Couleur blanche pour le texte */
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.carousel-caption p {
+    font-size: 1.25rem; /* Taille de police du texte */
+    color: #f1f1f1; /* Couleur légèrement grise pour le texte */
+    margin-bottom: 20px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-image: none; /* Retire les icônes par défaut de Bootstrap */
+    padding: 15px;
+    background-color: transparent; /* Fond transparent */
+    border: none; /* Retire la bordure */
+}
+
+.carousel-control-prev-icon::after,
+.carousel-control-next-icon::after {
+    content: ''; /* Crée une flèche personnalisée */
+    border: solid white;
+    border-width: 0 6px 6px 0;
+    display: inline-block;
+    padding: 8px;
+}
+
+.carousel-control-prev-icon::after {
+    transform: rotate(135deg); /* Flèche orientée vers la gauche */
+}
+
+.carousel-control-next-icon::after {
+    transform: rotate(-45deg); /* Flèche orientée vers la droite */
+}
+
+.carousel-indicators [data-bs-target] {
+    background-color: #947054; /* Points de navigation marron */
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    opacity: 1; /* Pour qu'ils soient toujours visibles */
+}
+
+.carousel-indicators .active {
+    background-color: #fff; /* Point actif en blanc */
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes égales */
+    gap: 50px; /* Espace entre les cartes */
+    justify-content: center; /* Centre les colonnes sur la page */
+    padding: 20px; /* Padding pour l'espacement global */
+    max-width: 1500px; /* Limite la largeur totale de la grille pour éviter l'espace blanc à droite */
+    margin: 0 auto; /* Centre la grille horizontalement */
+}
+
+.card {
+    font-family: lora, serif;
+    border: 3px solid #f2f2f2; /* Bordure légère autour de la carte */
+    text-align: center; /* Centre le contenu de la carte */
+    max-width: 500px; /* Largeur maximale de la carte */
+    margin: 0 auto; /* Centre chaque carte dans sa colonne */
+    padding: 30px; /* Espace interne de la carte */
+    box-sizing: border-box; /* Inclut la bordure et le padding dans la largeur totale de la carte */
+    transition: transform 0.7s ease, box-shadow 0.7s ease; /* Ajoute une transition pour un effet plus fluide */
+}
+
+.card:hover {
+    transform: translateY(-8px); /* Légère élévation de la carte sur le survol */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Ajoute une ombre pour donner un effet de profondeur */
+    border-color: #797777; /* Change la couleur de la bordure lors du survol */
+}
+
+.card img {
+    max-width: 100%; /* Assure que l'image ne dépasse pas la largeur de la carte */
+    height: auto; /* Maintient le ratio d'aspect de l'image */
+    display: block; /* Élimine l'espace en dessous de l'image */
+    margin: 0 auto; /* Centre l'image horizontalement */
+}
+
+.card-Title {
+    padding-top: 15px;
+}
+
+hr {
+    border: none; /* Supprime les bordures par défaut */
+    height: 2px; /* Épaisseur de la ligne */
+    background-color: #333; /* Couleur de la ligne */
+    margin: 20px 0; /* Espace au-dessus et en-dessous de la ligne */
+    width: 80%; /* Largeur de la ligne */
+    margin-left: auto; /* Centre la ligne horizontalement */
+    margin-right: auto; /* Centre la ligne horizontalement */
+    padding: 0 20px; /* Espacement à droite et à gauche */
+}
+.cards-properties {
+    margin: 70px;
+}
+
+.card-propertie {
+    display: flex;
+    align-items: center;
+    position: relative; /* Ajouté pour positionner le contenu au centre */
+    margin-bottom: 70px;  
+}
+
+.card-propertie img {
+    max-width: 100%;
+    height: 500px;
+    object-fit: cover;
+    display: block; /* Assure que l'image ne dépasse pas le conteneur */
+}
+
+.card-propertie .content {
+    position: absolute;
+    top: 50%; /* Centre verticalement par rapport à l'image */
+    left: 50%; /* Centre horizontalement par rapport à l'image */
+    transform: translate(70px, -50px); /* Ajuste pour centrer correctement */
+    max-width: 50%;
+    padding: 20px; /* Ajoute un peu de padding autour du texte */
+    background-color: rgba(255, 255, 255, 0.7); /* Arrière-plan semi-transparent pour améliorer la lisibilité */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Ajoute une ombre autour du texte */
+
+}
+
+.titleCardProperties {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0; /* Enlève les marges par défaut */
+}
+
+.Body-PropertyCard {
+    padding-top: 10px;
+    margin: 0; /* Assure qu'il n'y ait pas d'espace supplémentaire en haut du paragraphe */
+}
+
+.footer-newsletter {
+    text-align: center;
+    padding: 20px 20px;
+    background-color: #333;
+    color: white;
+}
+
+.footer-newsletter h4 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #947054;
+}
+
+.footer-newsletter p {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #bbb;
+}
+
+.footer-newsletter form {
+    display: flex;
+    justify-content: center;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.footer-newsletter input[type="email"] {
+    padding: 10px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    width: 70%;
+    margin-right: 10px;
+}
+
+.footer-newsletter button {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: white;
+    background-color: #a28a78;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.footer-newsletter button:hover {
+    background-color: #b99f95;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 25px;
+    background-color: #333;
+    color: white;
+}
+
+.footer-column {
+    width: 23%;
+    text-align: center;
+}
+
+.footer-column h4 {
+    margin-bottom: 15px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #947054;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 9px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.footer-column ul li a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s;
+}
+
+.footer-column ul li a:hover {
+    color: #947054;
+}
+
+.social-icons a {
+    display: inline-block;
+    margin-right: 15px;
+    font-size: 18px;
+    color: white;
+    transition: color 0.3s;
+}
+
+.social-icons a:hover {
+    color: #947054;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding: 12px 0;
+    background-color: #222;
+    color: white;
+    font-size: 14px;
+}

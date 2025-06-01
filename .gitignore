@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+
+# VSCode
+.vscode/
+
+# Node modules (si jamais tu utilises node)
+node_modules/
+
+# Logs
+*.log
