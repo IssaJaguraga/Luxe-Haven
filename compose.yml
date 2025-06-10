@@ -3,17 +3,25 @@ services:
   front:
     image: nginx:alpine
     ports:
-      - 127.0.0.1:${FRONT_PORT}:80  
+      - 80:80  
     volumes:
       - ./front:/usr/share/nginx/html
 
   back:
     image: directus/directus
     ports:
-      - 127.0.0.1:${BACK_PORT}:8055
+      - 8055:8055
+    env_file:
+      - .env
     environment:
       ADMIN_EMAIL: ${ADMIN_EMAIL}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      DB_CLIENT: "pg"
+      DB_HOST: "db"
+      DB_PORT: ${DB_PORT}
+      DB_DATABASE: ${POSTGRES_DB}
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
     depends_on:
       - db
     networks:
@@ -21,8 +29,6 @@ services:
 
   db: 
     image: postgres:13
-    ports: 
-      - 127.0.0.1:${DB_PORT}:5432 
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
