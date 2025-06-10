@@ -25,7 +25,7 @@ services:
     depends_on:
       - db
     networks:
-      - db-network  # Permet la communication avec la base
+      - db-network  # Permet la communication avec la base de données
 
   db: 
     image: postgres:13
@@ -35,7 +35,7 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
     volumes:
       - ./back/init.sql:/docker-entrypoint-initdb.d/init.sql  # Script de création BDD
-      - luxehaven-db-data:/var/lib/postgresql/data  # Volume persistant
+      - luxehaven-db-data:/var/lib/postgresql/data  # Sauvegarde persistante des données
     networks:
       - db-network
 
@@ -43,4 +43,4 @@ volumes:
   luxehaven-db-data: 
 
 networks:
-  db-network: # Réseau personnalisé pour isoler les services sensibles
+  db-network: # # Réseau privé pour l’interconnexion des services backend et base de données
