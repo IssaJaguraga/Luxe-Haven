@@ -43,6 +43,7 @@ const About = () => {
             background: 'linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(/images/luxury-texture.jpg) center/cover no-repeat',
             color: 'white',
             padding: '60px 20px',
+            borderRadius: '8px',
             textAlign: 'center',
             borderBottom: '4px solid #d4af37'
           }}>

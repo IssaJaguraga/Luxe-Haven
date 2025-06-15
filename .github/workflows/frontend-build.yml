@@ -10,6 +10,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: react-front
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -20,7 +24,7 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install --prefix react-front
+        run: npm ci
 
       - name: Build project
-        run: npm run build --prefix react-front
+        run: npm run build
