@@ -1,16 +1,20 @@
 
 services:
   front:
-    image: nginx:alpine
+    build:
+      context: ./react-front
+      dockerfile: Dockerfile
     ports:
-      - 80:80  
-    volumes:
-      - ./front:/usr/share/nginx/html
+      - "80:80"
+    depends_on:
+      - back
+    networks:
+      - db-network
 
-  back:
+  back: 
     image: directus/directus
     ports:
-      - 8055:8055
+      - "8055:8055"
     env_file:
       - .env
     environment:
@@ -25,22 +29,24 @@ services:
     depends_on:
       - db
     networks:
-      - db-network  # Permet la communication avec la base de données
+      - db-network
 
-  db: 
+  db:
     image: postgres:13
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "5432:5432"
     volumes:
-      - ./back/init.sql:/docker-entrypoint-initdb.d/init.sql  # Script de création BDD
-      - luxehaven-db-data:/var/lib/postgresql/data  # Sauvegarde persistante des données
+      - ./back/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - luxehaven-db-data:/var/lib/postgresql/data
     networks:
       - db-network
 
 volumes:
-  luxehaven-db-data: 
+  luxehaven-db-data:
 
 networks:
-  db-network: # # Réseau privé pour l’interconnexion des services backend et base de données
+  db-network:
