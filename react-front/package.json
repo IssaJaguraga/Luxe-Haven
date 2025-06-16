@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "jest",
-    "test:ci": "jest --coverage --testLocationInResults --outputFile=coverage/sonar-report.xml --reporters=default --reporters=jest-sonar"
+    "test:ci": "jest --coverage --testLocationInResults --outputFile=coverage/sonar-report.xml --reporters=default --reporters=jest-sonar-reporter"
   },
   "dependencies": {
     "bootstrap": "^5.3.6",
@@ -52,6 +52,10 @@
     },
     "setupFilesAfterEnv": [
       "./jest.setup.js"
+    ],
+    "reporters": [
+      "default",
+      "jest-sonar-reporter"
     ]
   }
 }
