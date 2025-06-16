@@ -1,9 +1,8 @@
-import React from 'react'
+import React from 'react';
 
 const Contact = () => {
   return (
     <>
-      {/* Top header */}
       <header className="header-area">
         <div className="top-header-area">
           <div className="mail">
@@ -20,83 +19,151 @@ const Contact = () => {
         </div>
       </header>
 
-      {/* Main content */}
-      <main>
-        <div className="container maintenance-message" style={{
-          maxWidth: '600px',
-          margin: '40px auto',
-          backgroundColor: '#fff',
-          padding: '20px',
+      <div style={{
+        minHeight: '100vh',
+        backgroundColor: '#333',
+        display: 'flex',
+        justifyContent: 'center',
+        padding: '40px 20px',
+      }}>
+        <div style={{
+          maxWidth: '1100px',
+          backgroundColor: '#f5f5f5',
           borderRadius: '8px',
-          boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
-          textAlign: 'center',
-          color: '#333'
+          boxShadow: '0 0 20px rgba(0,0,0,0.3)',
+          padding: '50px 30px',
+          color: '#222',
+          width: '100%',
         }}>
-          <h1 style={{ color: '#e74c3c', marginBottom: '20px' }}>🚧 Site en Maintenance 🚧</h1>
-          <p>Nous sommes actuellement en train de mettre à jour notre site pour améliorer votre expérience. Pendant cette période, certaines fonctionnalités peuvent ne pas être disponibles.</p>
-          <p>Nous faisons tout notre possible pour terminer les travaux rapidement et vous remercions de votre patience et de votre compréhension.</p>
-          <p><strong>Veuillez revenir plus tard pour accéder à notre site.</strong></p>
-          <div className="contact" style={{ marginTop: '20px', fontSize: '1em' }}>
-            <p>Pour toute question urgente, n'hésitez pas à nous contacter à <a href="mailto:contact@luxhaven.com">contact@luxhaven.com</a></p>
-          </div>
-          <p>Merci de votre compréhension !</p>
-          <p>L'équipe <strong>LuxHaven</strong></p>
-        </div>
-      </main>
+          {/* Hero */}
+          <section style={{
+            background: 'linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(/images/luxury-texture.jpg) center/cover no-repeat',
+            color: 'white',
+            padding: '60px 20px',
+            borderRadius: '8px',
+            textAlign: 'center',
+            borderBottom: '4px solid #d4af37'
+          }}>
+            <h1 style={{ fontSize: '2.5rem', marginBottom: '10px' }}>
+              Contactez <span style={{ color: '#d4af37' }}>LuxHaven</span>
+            </h1>
+            <p style={{ fontSize: '1.1rem', maxWidth: '800px', margin: '0 auto' }}>
+              Nous sommes à votre disposition pour toute demande ou prise de rendez-vous.
+            </p>
+          </section>
 
-      {/* Footer */}
-      <footer>
-        <div className="footer-newsletter">
-          <h4>Abonnez-vous à notre Newsletter</h4>
-          <p>Recevez les dernières nouvelles et mises à jour directement dans votre boîte de réception.</p>
-          <form>
-            <input type="email" placeholder="Votre email" required />
-            <button type="submit">S'abonner</button>
-          </form>
-        </div>
-        <div className="footer-container">
-          <div className="footer-column">
-            <h4>Contactez-nous</h4>
-            <ul>
-              <li><i className="fas fa-map-marker-alt"></i> 123 Rue Principale, Paris</li>
-              <li><i className="fas fa-phone"></i> +33 1 23 45 67 89</li>
-              <li><i className="fas fa-envelope"></i> info@exemple.com</li>
+          {/* Formulaire de contact */}
+          <section style={{ padding: '50px 20px' }}>
+            <h2 style={{ textAlign: 'center', marginBottom: '30px' }}>Formulaire de contact</h2>
+            <form style={{ maxWidth: '700px', margin: '0 auto' }}>
+              <div style={{ marginBottom: '20px' }}>
+                <label htmlFor="name">Nom</label><br />
+                <input type="text" id="name" name="name" required style={inputStyle} />
+              </div>
+              <div style={{ marginBottom: '20px' }}>
+                <label htmlFor="email">Email</label><br />
+                <input type="email" id="email" name="email" required style={inputStyle} />
+              </div>
+              <div style={{ marginBottom: '20px' }}>
+                <label htmlFor="subject">Sujet</label><br />
+                <input type="text" id="subject" name="subject" required style={inputStyle} />
+              </div>
+              <div style={{ marginBottom: '20px' }}>
+                <label htmlFor="message">Message</label><br />
+                <textarea id="message" name="message" rows="5" required style={textareaStyle}></textarea>
+              </div>
+              <div style={{ textAlign: 'center' }}>
+                <button type="submit" style={buttonStyle}>Envoyer le message</button>
+              </div>
+            </form>
+          </section>
+
+          {/* Coordonnées */}
+          <section style={{ padding: '30px 20px', backgroundColor: '#fafafa', borderRadius: '6px', marginTop: '30px' }}>
+            <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Nos coordonnées</h2>
+            <ul style={{ listStyle: 'none', paddingLeft: 0, lineHeight: '2em', textAlign: 'center' }}>
+              <li>📍 123 Rue Principale, Paris</li>
+              <li>📞 +33 1 23 45 67 89</li>
+              <li>📧 info@exemple.com</li>
             </ul>
-          </div>
-          <div className="footer-column">
-            <h4>Liens Rapides</h4>
-            <ul>
-              <li><a href="/">Accueil</a></li>
-              <li><a href="/about">À propos</a></li>
-              <li><a href="/services">Services</a></li>
-              <li><a href="/contact">Contact</a></li>
-            </ul>
-          </div>
-          <div className="footer-column">
-            <h4>Nos Services</h4>
-            <ul>
-              <li><a href="/consultation">Consultation</a></li>
-              <li><a href="/gestion-projet">Gestion de Projet</a></li>
-              <li><a href="/developpement-web">Développement Web</a></li>
-              <li><a href="/marketing">Marketing</a></li>
-            </ul>
-          </div>
-          <div className="footer-column">
-            <h4>Suivez-nous</h4>
-            <div className="social-icons">
-              <a href="#"><i className="fab fa-facebook-f"></i></a>
-              <a href="#"><i className="fab fa-twitter"></i></a>
-              <a href="#"><i className="fab fa-instagram"></i></a>
-              <a href="#"><i className="fab fa-linkedin-in"></i></a>
-            </div>
-          </div>
+          </section>
+
+          {/* Newsletter */}
+          <section style={{
+            backgroundColor: '#333',
+            color: 'white',
+            textAlign: 'center',
+            padding: '60px 20px',
+            borderRadius: '6px',
+            marginTop: '40px'
+          }}>
+            <h2 style={{ fontSize: '2rem' }}>Restez informé</h2>
+            <p style={{ maxWidth: '700px', margin: '20px auto' }}>
+              Inscrivez-vous à notre newsletter pour recevoir nos dernières actualités.
+            </p>
+            <form style={{ marginTop: '30px' }}>
+              <input type="email" placeholder="Votre email" required style={{
+                padding: '12px',
+                borderRadius: '30px 0 0 30px',
+                border: 'none',
+                width: '250px',
+                color: '#000',
+                backgroundColor: '#fff8e1'
+              }} />
+              <button type="submit" style={{
+                padding: '12px 20px',
+                borderRadius: '0 30px 30px 0',
+                border: 'none',
+                backgroundColor: '#d4af37',
+                color: '#000',
+                fontWeight: 'bold',
+                cursor: 'pointer'
+              }}>
+                S'abonner
+              </button>
+            </form>
+          </section>
         </div>
-        <div className="footer-bottom">
-          <p>&copy; 2024 VotreEntreprise. Tous droits réservés.</p>
-        </div>
-      </footer>
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default Contact
+// Styles pour les champs
+const inputStyle = {
+  width: '100%',
+  padding: '10px',
+  borderRadius: '6px',
+  border: '1px solid #ccc',
+  fontSize: '1rem',
+  backgroundColor: '#fff8e1',
+  color: '#000',
+  zIndex: 1,
+  position: 'relative'
+};
+
+const textareaStyle = {
+  width: '100%',
+  padding: '10px',
+  borderRadius: '6px',
+  border: '1px solid #ccc',
+  fontSize: '1rem',
+  resize: 'vertical',
+  backgroundColor: '#fff8e1',
+  color: '#000',
+  zIndex: 1,
+  position: 'relative'
+};
+
+const buttonStyle = {
+  backgroundColor: '#d4af37',
+  color: '#000',
+  padding: '12px 24px',
+  border: 'none',
+  borderRadius: '30px',
+  fontWeight: 'bold',
+  fontSize: '1rem',
+  cursor: 'pointer'
+};
+
+export default Contact;
