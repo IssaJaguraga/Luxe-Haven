@@ -79,7 +79,7 @@ const Contact = () => {
           </section>
 
           {/* Coordonnées */}
-          <section style={{ padding: '30px 20px', backgroundColor: '#fafafa', borderRadius: '6px', marginTop: '30px' }}>
+          <section style={{ padding: '30px 20px', backgroundColor: '#f0f8ff', borderRadius: '6px', marginTop: '30px' }}>
             <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Nos coordonnées</h2>
             <ul style={{ listStyle: 'none', paddingLeft: 0, lineHeight: '2em', textAlign: 'center' }}>
               <li>📍 123 Rue Principale, Paris</li>
@@ -108,7 +108,7 @@ const Contact = () => {
                 border: 'none',
                 width: '250px',
                 color: '#000',
-                backgroundColor: '#fff8e1'
+                backgroundColor: '#f0f8ff'
               }} />
               <button type="submit" style={{
                 padding: '12px 20px',
@@ -136,7 +136,7 @@ const inputStyle = {
   borderRadius: '6px',
   border: '1px solid #ccc',
   fontSize: '1rem',
-  backgroundColor: '#fff8e1',
+  backgroundColor: '#f0f8ff',
   color: '#000',
   zIndex: 1,
   position: 'relative'
@@ -149,7 +149,7 @@ const textareaStyle = {
   border: '1px solid #ccc',
   fontSize: '1rem',
   resize: 'vertical',
-  backgroundColor: '#fff8e1',
+  backgroundColor: '#f0f8ff',
   color: '#000',
   zIndex: 1,
   position: 'relative'
