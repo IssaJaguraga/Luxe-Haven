@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - dev
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build-and-test:
@@ -21,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: npm install --prefix react-front
 
-      - name: Run tests (Jest)
+      - name: Run tests (Jest with coverage report)
         run: npm run test:ci --prefix react-front
 
       - name: Build project
