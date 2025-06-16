@@ -21,8 +21,17 @@ jobs:
       - name: Install dependencies
         run: npm install --prefix react-front
 
-      - name: Run tests
-        run: npm test --prefix react-front
+      - name: Run tests (Jest)
+        run: npm run test:ci --prefix react-front
 
       - name: Build project
         run: npm run build --prefix react-front
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v2
+        with:
+          projectBaseDir: react-front
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_PROJECT_KEY: IssaJaguraga_Luxe-Haven
+          SONAR_ORGANIZATION: luxe-haven
