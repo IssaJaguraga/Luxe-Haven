@@ -17,3 +17,11 @@ jobs:
         with:
           username: ${{ secrets.docker_username }}
           password: ${{ secrets.docker_password }}
+
+      - name: Build Docker image
+        run: |
+          docker build -t ${{ secrets.docker_username }}/luxe-haven-front:latest ./react-front
+
+      - name: Push Docker image to Docker Hub
+        run: |
+          docker push ${{ secrets.docker_username }}/luxe-haven-front:latest
