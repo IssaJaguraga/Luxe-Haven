@@ -1,0 +1,13 @@
+{
+  "name": "directus",
+  "version": "11.8.0",
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json",
+    "./version": "./version.js"
+  },
+  "bin": {
+    "directus": "cli.js"
+  },
+  "packageManager": "pnpm@9.15.6"
+}

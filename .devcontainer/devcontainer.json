@@ -1,0 +1,19 @@
+{
+  "name": "DevOps React + Directus (Lux-Haven)",
+  "image": "node:20",
+  "postCreateCommand": "npm install --prefix react-front",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "xabikos.JavaScriptSnippets"
+      ]
+    }
+  },
+  "mounts": [
+    "source=${localWorkspaceFolder},target=/workspace/devops_projects,type=bind"
+  ],
+  "workspaceFolder": "/workspace/devops_projects",
+  "forwardPorts": [5173, 8055, 80]
+}
