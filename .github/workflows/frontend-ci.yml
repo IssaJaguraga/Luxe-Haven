@@ -21,10 +21,10 @@ jobs:
       - name: Install dependencies
         run: npm install --prefix react-front
 
-      - name: Run tests with coverage
+      - name: Run tests
         run: npm run test:ci --prefix react-front
 
-      - name: Move cobertura file to sonar default location
+      - name: coverage
         run: |
           mkdir -p react-front/coverage
           mv react-front/coverage/cobertura-coverage.xml react-front/coverage/sonar-report.xml
@@ -41,3 +41,7 @@ jobs:
             -Dsonar.organization=luxe-haven
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+
+          
+

@@ -70,7 +70,7 @@ const About = () => {
           </section>
 
           {/* Mission */}
-          <section style={{ backgroundColor: '#ffffff', padding: '20px 20px', marginBottom: '40px' }}>
+          <section style={{ padding: '20px 20px', marginBottom: '40px' }}>
             <h2 style={{ textAlign: 'center', marginBottom: '30px' }}>Notre mission</h2>
             <p>
               Offrir une expérience sur mesure à chaque client. Chez <strong>LuxHaven</strong>, nous ne vendons pas des biens : nous accompagnons des
@@ -97,7 +97,7 @@ const About = () => {
           </section>
 
           {/* Valeurs */}
-          <section style={{ backgroundColor: '#fafafa', padding: '20px 20px', marginBottom: '40px' }}>
+          <section style={{ padding: '20px 20px', marginBottom: '40px' }}>
             <h2 style={{ textAlign: 'center', marginBottom: '30px' }}>Nos valeurs</h2>
             <ul style={{ listStyle: 'none', paddingLeft: 0, lineHeight: '1.8' }}>
               <li>💼 <strong>Professionnalisme :</strong> Chaque détail compte. Nous travaillons avec méthode, exigence et discrétion.</li>
