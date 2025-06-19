@@ -1,0 +1,15 @@
+
+node_modules
+
+build
+
+.DS_Store
+.vscode
+*.log
+
+.env
+.env.*
+
+.git
+.gitignore
+Dockerfile
