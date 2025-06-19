@@ -12,7 +12,7 @@ services:
       - db-network
 
   back: 
-    image: directus/directus
+    image: directus/directus:11.8.0
     ports:
       - "8055:8055"
     env_file:
@@ -26,6 +26,12 @@ services:
       DB_DATABASE: ${POSTGRES_DB}
       DB_USER: ${POSTGRES_USER}
       DB_PASSWORD: ${POSTGRES_PASSWORD}
+      SECRET: ${SECRET}
+    volumes:
+      - ./back/uploads:/directus/uploads
+      - ./back/extensions:/directus/extensions
+
+
     depends_on:
       - db
     networks:
