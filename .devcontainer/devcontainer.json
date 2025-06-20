@@ -1,5 +1,5 @@
 {
-  "name": "DevOps React + Directus (Lux-Haven)",
+  "name": "DevOps React + Directus (Luxe-Haven)",
   "image": "node:20",
   "postCreateCommand": "npm install --prefix react-front",
   "customizations": {

@@ -1,0 +1,94 @@
+<?xml version="1.0" ?>
+<!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
+<coverage lines-valid="16" lines-covered="16" line-rate="1" branches-valid="0" branches-covered="0" branch-rate="1" timestamp="1750433347183" complexity="0" version="0.1">
+  <sources>
+    <source>/Users/issa/Documents/TitreProDevops/devops_projects/Luxe-Haven/react-front</source>
+  </sources>
+  <packages>
+    <package name="main" line-rate="1" branch-rate="1">
+      <classes>
+        <class name="About.jsx" filename="src/components/About.jsx" line-rate="1" branch-rate="1">
+          <methods>
+            <method name="(anonymous_0)" hits="1" signature="()V">
+              <lines>
+                <line number="3" hits="1"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="3" hits="1" branch="false"/>
+            <line number="4" hits="1" branch="false"/>
+          </lines>
+        </class>
+        <class name="Contact.jsx" filename="src/components/Contact.jsx" line-rate="1" branch-rate="1">
+          <methods>
+            <method name="(anonymous_0)" hits="1" signature="()V">
+              <lines>
+                <line number="3" hits="1"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="3" hits="1" branch="false"/>
+            <line number="4" hits="1" branch="false"/>
+            <line number="133" hits="1" branch="false"/>
+            <line number="145" hits="1" branch="false"/>
+            <line number="158" hits="1" branch="false"/>
+          </lines>
+        </class>
+        <class name="Home.jsx" filename="src/components/Home.jsx" line-rate="1" branch-rate="1">
+          <methods>
+            <method name="(anonymous_0)" hits="1" signature="()V">
+              <lines>
+                <line number="3" hits="1"/>
+              </lines>
+            </method>
+            <method name="(anonymous_1)" hits="6" signature="()V">
+              <lines>
+                <line number="48" hits="6"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="3" hits="1" branch="false"/>
+            <line number="4" hits="1" branch="false"/>
+            <line number="49" hits="6" branch="false"/>
+          </lines>
+        </class>
+        <class name="Navbar.jsx" filename="src/components/Navbar.jsx" line-rate="1" branch-rate="1">
+          <methods>
+            <method name="(anonymous_0)" hits="1" signature="()V">
+              <lines>
+                <line number="6" hits="1"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="6" hits="1" branch="false"/>
+            <line number="7" hits="1" branch="false"/>
+          </lines>
+        </class>
+        <class name="Properties.jsx" filename="src/components/Properties.jsx" line-rate="1" branch-rate="1">
+          <methods>
+            <method name="(anonymous_0)" hits="1" signature="()V">
+              <lines>
+                <line number="3" hits="1"/>
+              </lines>
+            </method>
+            <method name="(anonymous_1)" hits="4" signature="()V">
+              <lines>
+                <line number="53" hits="4"/>
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="3" hits="1" branch="false"/>
+            <line number="5" hits="1" branch="false"/>
+            <line number="32" hits="1" branch="false"/>
+            <line number="54" hits="4" branch="false"/>
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>
