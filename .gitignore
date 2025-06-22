@@ -34,3 +34,18 @@ directus/temp/
 
 # Git metadata
 .git/
+
+# Terraform (dossier infra/)
+*.tfstate
+*.tfstate.backup
+.terraform/
+.crash
+*.log
+*.tfvars
+terraform.tfplan
+*.auto.tfvars
+*.auto.tfvars.json
+override.tf
+secret.tf
+credentials.json
+application_default_credentials.json
