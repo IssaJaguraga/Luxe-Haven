@@ -49,3 +49,5 @@ override.tf
 secret.tf
 credentials.json
 application_default_credentials.json
+# Ignore GCP service account credentials
+terraform-service-account.json
