@@ -1,53 +1,52 @@
 # macOS
 .DS_Store
 
-# VS Code
 .vscode/
 
-# Node.js
+# Node.js / Frontend 
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Environnements
 .env
-.env.*   # pour .env.development, .env.local, etc.
+.env.*
+*.env
 
-# cSpell config
-.cspell.json
-
-# Build React
-react-front/build/
-
-# Logs
 *.log
 
-# Directus - fichiers à ne pas versionner (uploads, extensions, cache, temp)
 back/uploads/
 back/extensions/
 directus/.cache/
 directus/temp/
 
-# Devcontainers
+react-front/build/
+
+.cspell.json
+
 .devcontainer/.devcontainer.json
 
-# Git metadata
 .git/
 
-# Terraform (dossier infra/)
+# Terraform (Global et infra/)
 *.tfstate
 *.tfstate.backup
-.terraform/
-.crash
-*.log
 *.tfvars
-terraform.tfplan
 *.auto.tfvars
 *.auto.tfvars.json
+terraform.tfplan
 override.tf
 secret.tf
 credentials.json
 application_default_credentials.json
-# Ignore GCP service account credentials
-terraform-service-account.json
+.crash
+.terraform/
+
+# Terraform (dossier infra/) 
+infra/terraform-service-account.json
+infra/terraform.tfstate
+infra/terraform.tfstate.backup
+infra/.terraform/
+
+# Scripts
+set_env.sh
