@@ -1,34 +1,40 @@
 # macOS
 .DS_Store
-
 .vscode/
+.cspell.json
 
-# Node.js / Frontend 
+# Git
+.git/
+*.log
+*.retry
+
+# Secrets et Environnements
+.env
+.env.*
+*.env
+*.pem
+*.key
+*.pub
+*.id_rsa
+*.id_rsa.pub
+credentials.json
+application_default_credentials.json
+set_env.sh
+
+# Node.js / React Frontend
 node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+react-front/build/
 
-.env
-.env.*
-*.env
-
-*.log
-
+# Directus (Back)
 back/uploads/
 back/extensions/
 directus/.cache/
 directus/temp/
 
-react-front/build/
-
-.cspell.json
-
-.devcontainer/.devcontainer.json
-
-.git/
-
-# Terraform (Global et infra/)
+# Terraform (global)
 *.tfstate
 *.tfstate.backup
 *.tfvars
@@ -37,16 +43,16 @@ react-front/build/
 terraform.tfplan
 override.tf
 secret.tf
-credentials.json
-application_default_credentials.json
 .crash
 .terraform/
 
-# Terraform (dossier infra/) 
+# Terraform (infra)
 infra/terraform-service-account.json
 infra/terraform.tfstate
 infra/terraform.tfstate.backup
 infra/.terraform/
+infra/id_rsa.pub
 
-# Scripts
-set_env.sh
+# Docker
+.dockerignore
+Dockerfile

@@ -31,5 +31,6 @@ resource "google_compute_instance" "preprod_vm" {
   metadata = {
     environment = "preproduction"
     managed_by  = "terraform"
+    ssh-keys    = "issa:${file("${path.module}/id_rsa.pub")}"
   }
 }
