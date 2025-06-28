@@ -1,6 +1,8 @@
 {
   "name": "DevOps React + Directus (Luxe-Haven)",
-  "image": "node:20",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
   "postCreateCommand": "npm install --prefix react-front",
   "customizations": {
     "vscode": {
