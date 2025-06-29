@@ -3,7 +3,7 @@ name: Preprod Deploy
 on:
   push:
     branches:
-      - main  # branche pour préprod
+      - main
 
 jobs:
   deploy:
