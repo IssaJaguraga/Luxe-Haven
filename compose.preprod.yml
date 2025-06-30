@@ -1,4 +1,3 @@
-
 services:
   db:
     image: postgres:13
@@ -12,11 +11,12 @@ services:
       - app-network
 
   back:
+    platform: linux/amd64
     image: ${DOCKER_USERNAME}/luxe-haven-back:latest
     ports:
       - "8055:8055"
     env_file:
-      - .env
+      - preprod.env
     environment:
       DB_CLIENT: "pg"
       DB_HOST: db
@@ -36,6 +36,7 @@ services:
       - app-network
 
   front:
+    platform: linux/amd64
     image: ${DOCKER_USERNAME}/luxe-haven-front:latest
     ports:
       - "80:80"
