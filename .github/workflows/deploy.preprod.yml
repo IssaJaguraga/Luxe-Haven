@@ -37,8 +37,8 @@ jobs:
           host: ${{ secrets.PREPROD_HOST }}
           username: ${{ secrets.PREPROD_USER }}
           key: ${{ secrets.PREPROD_SSH_KEY }}
-          source: "devops_projects/ansible/"
-          target: "/home/issa/devops_projects/ansible/"
+          source: "ansible/"
+          target: "/home/issa/Luxe-Haven/ansible/"
 
       - name: Deploy with Ansible
         uses: appleboy/ssh-action@v0.1.9
@@ -47,5 +47,5 @@ jobs:
           username: ${{ secrets.PREPROD_USER }}
           key: ${{ secrets.PREPROD_SSH_KEY }}
           script: |
-            cd /home/issa/devops_projects/ansible
+            cd /home/issa/Luxe-Haven/ansible
             ansible-playbook playbooks/site.yml -i inventory/hosts.ini --limit preprod
