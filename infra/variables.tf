@@ -15,3 +15,8 @@ variable "network_name" {
   type        = string
   default     = "luxehaven-vpc"
 }
+
+variable "my_ip" {
+  description = "IP publique autorisée pour SSH et Directus"
+  type        = string
+}
