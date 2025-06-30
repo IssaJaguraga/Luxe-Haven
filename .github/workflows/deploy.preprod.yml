@@ -31,6 +31,15 @@ jobs:
       - name: Push frontend Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/luxe-haven-front:latest
 
+      - name: Copy ansible files to remote
+        uses: appleboy/scp-action@v0.1.2
+        with:
+          host: ${{ secrets.PREPROD_HOST }}
+          username: ${{ secrets.PREPROD_USER }}
+          key: ${{ secrets.PREPROD_SSH_KEY }}
+          source: "devops_projects/ansible/"
+          target: "/home/issa/devops_projects/ansible/"
+
       - name: Deploy with Ansible
         uses: appleboy/ssh-action@v0.1.9
         with:
@@ -38,5 +47,5 @@ jobs:
           username: ${{ secrets.PREPROD_USER }}
           key: ${{ secrets.PREPROD_SSH_KEY }}
           script: |
-            cd /workspace/devops_projects/ansible
+            cd /home/issa/devops_projects/ansible
             ansible-playbook playbooks/site.yml -i inventory/hosts.ini --limit preprod
