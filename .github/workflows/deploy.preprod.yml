@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+  MY_IP: ${{ secrets.MY_IP }}
+
 jobs:
   deploy:
     runs-on: ubuntu-latest

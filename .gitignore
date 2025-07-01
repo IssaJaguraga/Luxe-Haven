@@ -47,12 +47,25 @@ secret.tf
 .terraform/
 
 # Terraform (infra)
-infra/terraform-service-account.json
-infra/terraform.tfstate
-infra/terraform.tfstate.backup
-infra/.terraform/
-infra/id_rsa.pub
+terraform/terraform-service-account.json
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+terraform/.terraform/
+terraform/id_rsa.pub
+
+terraform/preprod/terraform-service-account.json
+terraform/preprod/terraform.tfstate
+terraform/preprod/terraform.tfstate.backup
+terraform/preprod/.terraform/
+terraform/preprod/id_rsa.pub
+
+terraform/prod/terraform-service-account.json
+terraform/prod/terraform.tfstate
+terraform/prod/terraform.tfstate.backup
+terraform/prod/.terraform/
+terraform/prod/id_rsa.pub
 
 # Docker
 .dockerignore
 
+node_modules
