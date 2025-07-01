@@ -42,22 +42,37 @@ jobs:
       - name: Push frontend Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/luxe-haven-front:latest
 
-      # 5. Installer et configurer Google Cloud SDK avec la clé du compte de service
+      # 5. Authentification GCP avec la clé JSON
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      # 6. Installer Google Cloud SDK (sans options non supportées)
       - name: Setup Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: ${{ env.PROJECT_ID }}
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
-          export_default_credentials: true
 
-      # 6. Copier les fichiers Ansible sur la VM via tunnel IAP
-      - name: Copy Ansible files to remote VM via IAP tunnel
+      # 7. Archiver le dossier ansible
+      - name: Archive ansible folder
+        run: tar czf ansible.tar.gz ansible/
+
+      # 8. Copier l’archive sur la VM via tunnel IAP
+      - name: Copy ansible archive to remote VM via IAP tunnel
         run: |
           gcloud compute scp --project=${{ env.PROJECT_ID }} --zone=${{ env.ZONE }} --tunnel-through-iap \
-            -r ansible/ ${{ env.REMOTE_USER }}@${{ env.VM_NAME }}:${{ env.REMOTE_PATH }}/ansible
+            ansible.tar.gz ${{ env.REMOTE_USER }}@${{ env.VM_NAME }}:${{ env.REMOTE_PATH }}
 
-      # 7. Lancer le playbook Ansible sur la VM via tunnel IAP SSH
+      # 9. Décompresser l’archive sur la VM
+      - name: Extract ansible archive on VM
+        run: |
+          gcloud compute ssh --project=${{ env.PROJECT_ID }} --zone=${{ env.ZONE }} --tunnel-through-iap \
+            ${{ env.REMOTE_USER }}@${{ env.VM_NAME }} -- "tar xzf ${REMOTE_PATH}/ansible.tar.gz -C ${REMOTE_PATH}"
+
+      # 10. Lancer le playbook ansible sur la VM via tunnel IAP SSH
       - name: Run Ansible playbook remotely via IAP tunnel
         run: |
-          gcloud compute ssh --project=${{ env.PROJECT_ID }} --zone=${{ env.ZONE }} --tunnel-through-iap ${{ env.REMOTE_USER }}@${{ env.VM_NAME }} -- \
-            "cd ${{ env.REMOTE_PATH }}/ansible && ansible-playbook playbooks/site.yml -i inventory/hosts.ini --limit preprod"
+          gcloud compute ssh --project=${{ env.PROJECT_ID }} --zone=${{ env.ZONE }} --tunnel-through-iap \
+            ${{ env.REMOTE_USER }}@${{ env.VM_NAME }} -- \
+            "cd ${REMOTE_PATH}/ansible && ansible-playbook playbooks/site.yml -i inventory/hosts.ini --limit preprod"
