@@ -17,62 +17,62 @@ jobs:
       REMOTE_PATH: /home/issa/Luxe-Haven
 
     steps:
-      # 1. Récupérer le code
+      # 1. Checkout code
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 2. Connexion Docker Hub pour push/pull images
+      # 2. Login Docker Hub
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      # 3. Build et push image backend Docker
+      # 3. Build and push backend image
       - name: Build backend Docker image
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/luxe-haven-back:latest ./back
 
       - name: Push backend Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/luxe-haven-back:latest
 
-      # 4. Build et push image frontend Docker
+      # 4. Build and push frontend image
       - name: Build frontend Docker image
         run: docker build -t ${{ secrets.DOCKER_USERNAME }}/luxe-haven-front:latest ./react-front
 
       - name: Push frontend Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/luxe-haven-front:latest
 
-      # 5. Authentification GCP avec la clé JSON
+      # 5. Authenticate to Google Cloud
       - name: Authenticate to GCP
         uses: google-github-actions/auth@v1
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
-      # 6. Installer Google Cloud SDK (sans options non supportées)
+      # 6. Setup Google Cloud SDK
       - name: Setup Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v1
         with:
           project_id: ${{ env.PROJECT_ID }}
 
-      # 7. Archiver le dossier ansible
+      # 7. Archive ansible folder
       - name: Archive ansible folder
         run: tar czf ansible.tar.gz ansible/
 
-      # 8. Copier l’archive sur la VM via tunnel IAP
-      - name: Copy ansible archive to remote VM via IAP tunnel
+      # 8. Copy ansible archive to remote VM via IAP tunnel
+      - name: Copy ansible archive to remote VM
         run: |
           gcloud compute scp --project=${{ env.PROJECT_ID }} --zone=${{ env.ZONE }} --tunnel-through-iap \
             ansible.tar.gz ${{ env.REMOTE_USER }}@${{ env.VM_NAME }}:${{ env.REMOTE_PATH }}
 
-      # 9. Décompresser l’archive sur la VM
+      # 9. Extract ansible archive on VM
       - name: Extract ansible archive on VM
         run: |
           gcloud compute ssh --project=${{ env.PROJECT_ID }} --zone=${{ env.ZONE }} --tunnel-through-iap \
-            ${{ env.REMOTE_USER }}@${{ env.VM_NAME }} -- "tar xzf ${REMOTE_PATH}/ansible.tar.gz -C ${REMOTE_PATH}"
+            ${{ env.REMOTE_USER }}@${{ env.VM_NAME }} -- "tar xzf ${{ env.REMOTE_PATH }}/ansible.tar.gz -C ${{ env.REMOTE_PATH }}"
 
-      # 10. Lancer le playbook ansible sur la VM via tunnel IAP SSH
-      - name: Run Ansible playbook remotely via IAP tunnel
+      # 10. Run ansible playbook remotely via IAP tunnel
+      - name: Run Ansible playbook remotely
         run: |
           gcloud compute ssh --project=${{ env.PROJECT_ID }} --zone=${{ env.ZONE }} --tunnel-through-iap \
             ${{ env.REMOTE_USER }}@${{ env.VM_NAME }} -- \
-            "cd ${REMOTE_PATH}/ansible && ansible-playbook playbooks/site.yml -i inventory/hosts.ini --limit preprod"
+            "cd ${{ env.REMOTE_PATH }}/ansible && ansible-playbook playbooks/site.yml -i inventory/hosts.ini --limit preprod"
