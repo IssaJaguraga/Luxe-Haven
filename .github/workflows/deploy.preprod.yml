@@ -48,32 +48,41 @@ jobs:
         with:
           project_id: ${{ env.PROJECT_ID }}
 
-      # --- Setup SSH key from secret ---
+      # Setup SSH private key
       - name: Setup SSH private key
         run: |
-          echo "${{ secrets.GCP_SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa_gcloud
+          mkdir -p ~/.ssh
+          printf "%s\n" "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa_gcloud
           chmod 600 ~/.ssh/id_rsa_gcloud
 
-      # --- Now use --ssh-key-file option to specify this key ---
+      # Add remote VM to known_hosts to avoid SSH prompt
+      - name: Add Google Cloud instance to known_hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${{ env.VM_NAME }} >> ~/.ssh/known_hosts
 
+      # Archive ansible folder
       - name: Archive ansible folder
         run: tar czf ansible.tar.gz ansible/
 
+      # Copy ansible archive to remote VM via IAP tunnel using SSH key
       - name: Copy ansible archive to remote VM
         run: |
           gcloud compute scp --project=${{ env.PROJECT_ID }} --zone=${{ env.ZONE }} --tunnel-through-iap \
-            --ssh-key-file ~/.ssh/id_rsa_gcloud \
+            --ssh-key-file $HOME/.ssh/id_rsa_gcloud \
             ansible.tar.gz ${{ env.REMOTE_USER }}@${{ env.VM_NAME }}:${{ env.REMOTE_PATH }}
 
+      # Extract ansible archive on VM
       - name: Extract ansible archive on VM
         run: |
           gcloud compute ssh --project=${{ env.PROJECT_ID }} --zone=${{ env.ZONE }} --tunnel-through-iap \
-            --ssh-key-file ~/.ssh/id_rsa_gcloud --ssh-flag="-tt" \
+            --ssh-key-file $HOME/.ssh/id_rsa_gcloud --ssh-flag="-tt" \
             ${{ env.REMOTE_USER }}@${{ env.VM_NAME }} -- "tar xzf ${{ env.REMOTE_PATH }}/ansible.tar.gz -C ${{ env.REMOTE_PATH }}"
 
+      # Run Ansible playbook remotely
       - name: Run Ansible playbook remotely
         run: |
           gcloud compute ssh --project=${{ env.PROJECT_ID }} --zone=${{ env.ZONE }} --tunnel-through-iap \
-            --ssh-key-file ~/.ssh/id_rsa_gcloud \
+            --ssh-key-file $HOME/.ssh/id_rsa_gcloud \
             ${{ env.REMOTE_USER }}@${{ env.VM_NAME }} -- \
             "cd ${{ env.REMOTE_PATH }}/ansible && ansible-playbook playbooks/site.yml -i inventory/hosts.ini --limit preprod"
