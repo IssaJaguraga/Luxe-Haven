@@ -68,6 +68,7 @@ jobs:
       - name: Extract ansible archive on VM
         run: |
           gcloud compute ssh --project=${{ env.PROJECT_ID }} --zone=${{ env.ZONE }} --tunnel-through-iap \
+          --ssh-flag="-tt" \
             ${{ env.REMOTE_USER }}@${{ env.VM_NAME }} -- "tar xzf ${{ env.REMOTE_PATH }}/ansible.tar.gz -C ${{ env.REMOTE_PATH }}"
 
       # 10. Run ansible playbook remotely via IAP tunnel
