@@ -2,7 +2,7 @@
 
 # Récupère le chemin absolu du dossier contenant ce script
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-CREDENTIAL_PATH="$SCRIPT_DIR/infra/terraform-service-account.json"
+CREDENTIAL_PATH="$SCRIPT_DIR/terraform/terraform-service-account.json"
 
 # Vérifie si le fichier existe
 if [ -f "$CREDENTIAL_PATH" ]; then

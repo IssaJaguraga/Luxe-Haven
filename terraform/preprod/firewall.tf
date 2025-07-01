@@ -4,7 +4,8 @@ resource "google_compute_firewall" "allow_icmp_ssh" {
   project       = var.project_id
   direction     = "INGRESS"
   priority      = 1000
-  source_ranges = ["176.186.175.230/32"]  # ✅ ton IP à toi
+  source_ranges = ["0.0.0.0/0"]  # Ouvert à toutes les IPs temporairement pour test déploiement
+
   target_tags   = ["preprod"]
 
   allow {
@@ -16,7 +17,7 @@ resource "google_compute_firewall" "allow_icmp_ssh" {
     ports    = ["22"]
   }
 
-  description = "Allow ICMP and SSH from my IP only for preprod"
+  description = "Allow ICMP and SSH from anywhere temporarily for preprod deployment testing"
 }
 
 resource "google_compute_firewall" "allow_directus" {
@@ -25,7 +26,8 @@ resource "google_compute_firewall" "allow_directus" {
   project       = var.project_id
   direction     = "INGRESS"
   priority      = 1001
-  source_ranges = ["176.186.175.230/32"]  # ✅ ton IP à toi
+  source_ranges = ["176.186.175.230/32"]
+
   target_tags   = ["preprod"]
 
   allow {
