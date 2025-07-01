@@ -15,6 +15,7 @@ jobs:
       VM_NAME: preprod-vm
       REMOTE_USER: issa
       REMOTE_PATH: /home/issa/Luxe-Haven
+      VM_IP: 35.246.87.12
 
     steps:
       - name: Checkout code
@@ -55,11 +56,11 @@ jobs:
           printf "%s\n" "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa_gcloud
           chmod 600 ~/.ssh/id_rsa_gcloud
 
-      # Add remote VM to known_hosts to avoid SSH prompt
+      # Add remote VM IP to known_hosts to avoid SSH prompt
       - name: Add Google Cloud instance to known_hosts
         run: |
           mkdir -p ~/.ssh
-          ssh-keyscan -H ${{ env.VM_NAME }} >> ~/.ssh/known_hosts
+          ssh-keyscan -H 35.246.87.12 >> ~/.ssh/known_hosts
 
       # Archive ansible folder
       - name: Archive ansible folder
