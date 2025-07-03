@@ -1,11 +1,11 @@
-- name: Mise à jour des packages
+- name: Mise à jour des paquets
   apt:
-    update_cache: yes  # Rafraîchit la liste des paquets
-    cache_valid_time: 3600  # Cache valable pour 1h
+    update_cache: yes
+    cache_valid_time: 3600
 
-- name: Installation de packages de base
+- name: Installer les paquets de base
   apt:
-    name: "{{ item }}"  # Installe chaque paquet listé dans la loop
+    name: "{{ item }}"
     state: present
   loop:
     - curl

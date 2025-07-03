@@ -1,14 +1,28 @@
 # macOS
 .DS_Store
+
+# Visual Studio Code
 .vscode/
+
+# Spell checker config
 .cspell.json
+
+# Vim / editors temp files
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Git
 .git/
-*.log
 *.retry
 
-# Secrets et Environnements
+# Environment & secrets
 .env
 .env.*
 *.env
@@ -23,12 +37,17 @@ set_env.sh
 
 # Node.js / React Frontend
 node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-react-front/build/
+react-front/node_modules/
 
-# Directus (Back)
+# Build output
+react-front/build/
+react-front/dist/
+
+# Test coverage reports
+coverage/
+react-front/coverage/
+
+# Directus (Backend)
 back/uploads/
 back/extensions/
 directus/.cache/
@@ -64,8 +83,24 @@ terraform/prod/terraform.tfstate
 terraform/prod/terraform.tfstate.backup
 terraform/prod/.terraform/
 terraform/prod/id_rsa.pub
+# Binaires et exécutables
+terraform_1.12.2_linux_arm64.zip
+
+# Terraform (infra folder)
+infra/terraform-service-account.json
+infra/terraform.tfstate
+infra/terraform.tfstate.backup
+infra/.terraform/
+infra/id_rsa.pub
 
 # Docker
 .dockerignore
+
+# Coverage reports
+coverage/
+
+# Others
+*.env.local
+*.local
 
 node_modules

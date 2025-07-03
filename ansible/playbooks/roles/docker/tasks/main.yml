@@ -1,19 +1,19 @@
-- name: Ajout de la clé GPG officielle de Docker
+- name: Ajouter la clé GPG officielle de Docker
   apt_key:
     url: https://download.docker.com/linux/ubuntu/gpg
     state: present
 
-- name: Ajout du dépôt Docker
+- name: Ajouter le dépôt Docker
   apt_repository:
     repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
     state: present
 
-- name: Installation de Docker
+- name: Installer Docker
   apt:
     name: docker-ce
     state: present
 
-- name: Activation et démarrage de Docker
+- name: Activer et démarrer Docker
   service:
     name: docker
     state: started
