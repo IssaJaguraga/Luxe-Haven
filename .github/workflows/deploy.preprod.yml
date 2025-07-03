@@ -34,4 +34,17 @@ jobs:
         run: docker push ${{ secrets.DOCKER_USERNAME }}/luxe-haven-back:latest
 
       - name: Build frontend Docker image
-        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/luxe-haven-front:la_
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/luxe-haven-front:latest ./react-front
+
+      - name: Push frontend Docker image
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/luxe-haven-front:latest
+
+      - name: Deploy with Ansible
+        uses: appleboy/ssh-action@v0.1.9
+        with:
+          host: ${{ secrets.PREPROD_IP }}
+          username: issa
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /home/issa/Luxe-Haven/ansible
+            ansible-playbook playbooks/site.yml -i inventory/hosts.ini --limit preprod
