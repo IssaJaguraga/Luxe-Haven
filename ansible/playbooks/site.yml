@@ -1,18 +1,10 @@
-
 - name: Configuration complète de la VM de préproduction
-
-# Cible le groupe défini dans hosts.ini
   hosts: preprod
-
-# On exécute en sudo
   become: true
 
-# On importe les variables globales
   vars_files:
     - ../group_vars/all.yml
 
-# Rôle qui fait les mises à jour et installe des utilitaires
-# Rôle qui installe Docker
   roles:
     - common
     - docker
