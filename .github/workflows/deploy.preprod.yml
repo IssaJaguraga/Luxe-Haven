@@ -15,7 +15,7 @@ jobs:
       VM_NAME: preprod-vm
       REMOTE_USER: issa
       REMOTE_PATH: /home/issa/Luxe-Haven
-      VM_IP: 35.246.87.12
+      VM_IP: 34.140.57.133
 
     steps:
       - name: Checkout code
@@ -39,10 +39,13 @@ jobs:
       - name: Push frontend Docker image
         run: docker push ${{ secrets.DOCKER_USERNAME }}/luxe-haven-front:latest
 
+      - name: Debug PREPROD_IP secret
+        run: echo "PREPROD_IP is ${{ secrets.PREPROD_IP }}"
+
       - name: Deploy with Ansible
         uses: appleboy/ssh-action@v0.1.9
         with:
-          host: ${{ secrets.PREPROD_IP }}
+          host: 34.140.57.133
           username: issa
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
