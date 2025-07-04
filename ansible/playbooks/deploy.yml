@@ -15,4 +15,4 @@
       authorized_key:
         user: issa
         state: present
-        key: "{{ lookup('file', 'id_rsa_gcloud.pub') }}"
+        key: "{{ lookup('file', '../id_rsa_gcloud.pub') }}"
