@@ -37,7 +37,7 @@ jobs:
       env:
         ANSIBLE_HOST_KEY_CHECKING: "False"
       run: |
-        ansible-playbook ansible/playbooks/deploy.yml -i ansible/inventory/prod.ini
+        ansible-playbook ansible/playbooks/deploy.yml -i ansible/inventory/prod_hosts.ini
 
     - name: Success message
       run: echo "✅ Déploiement en production terminé avec succès !"
