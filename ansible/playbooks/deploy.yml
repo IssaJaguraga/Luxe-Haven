@@ -1,0 +1,18 @@
+---
+- name: Configuration complète de la VM de production
+  hosts: prod
+  become: true
+
+  vars_files:
+    - ../group_vars/all.yml
+
+  roles:
+    - common
+    - docker
+
+  tasks:
+    - name: Ajouter la clé publique de déploiement GitHub Actions
+      authorized_key:
+        user: issa
+        state: present
+        key: "{{ lookup('file', 'id_rsa_gcloud.pub') }}"
