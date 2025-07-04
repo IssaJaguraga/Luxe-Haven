@@ -92,6 +92,7 @@ infra/terraform.tfstate
 infra/terraform.tfstate.backup
 infra/.terraform/
 infra/id_rsa.pub
+infra/envs/prod/terraform.tfvars
 
 # Docker
 .dockerignore
