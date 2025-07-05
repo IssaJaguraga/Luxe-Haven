@@ -1,10 +1,12 @@
----
-- name: Configuration complète de la VM de production
+- name: Configuration et déploiement complet en production
   hosts: prod
   become: true
 
   vars_files:
     - ../group_vars/all.yml
+
+  vars:
+    image_tag: "prod"  # valeur par défaut (override possible via GitHub Actions)
 
   roles:
     - common
@@ -16,3 +18,21 @@
         user: issa
         state: present
         key: "{{ deployment_pubkey }}"
+
+    - name: Pull et démarrage (ou mise à jour) du container luxe-haven-back
+      community.docker.docker_container:
+        name: luxe-haven-back
+        image: "ghcr.io/issajaguraga/luxe-haven-back:{{ image_tag }}"
+        state: started
+        restart_policy: unless-stopped
+        ports:
+          - "80:8055"
+
+    - name: Pull et démarrage (ou mise à jour) du container luxe-haven-front
+      community.docker.docker_container:
+        name: luxe-haven-front
+        image: "ghcr.io/issajaguraga/luxe-haven-front:{{ image_tag }}"
+        state: started
+        restart_policy: unless-stopped
+        ports:
+          - "8080:80"
