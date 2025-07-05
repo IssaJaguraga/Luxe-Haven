@@ -6,7 +6,7 @@
     - ../group_vars/all.yml
 
   vars:
-    image_tag: "prod"  # valeur par défaut (override possible via GitHub Actions)
+    image_tag: "prod"
 
   roles:
     - common
@@ -26,7 +26,7 @@
         state: started
         restart_policy: unless-stopped
         ports:
-          - "80:8055"
+          - "8055:8055"
 
     - name: Pull et démarrage (ou mise à jour) du container luxe-haven-front
       community.docker.docker_container:
@@ -36,3 +36,33 @@
         restart_policy: unless-stopped
         ports:
           - "8080:80"
+
+    - name: Copier la config nginx
+      template:
+        src: ../templates/nginx-luxe-haven.conf.j2
+        dest: /etc/nginx/sites-available/luxe-haven.conf
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Activer le site nginx luxe-haven
+      file:
+        src: /etc/nginx/sites-available/luxe-haven.conf
+        dest: /etc/nginx/sites-enabled/luxe-haven.conf
+        state: link
+        force: yes
+
+    - name: Tester la configuration nginx
+      command: nginx -t
+      register: nginx_test
+      ignore_errors: yes
+
+    - name: Afficher le résultat du test nginx
+      debug:
+        var: nginx_test.stdout
+
+    - name: Redémarrer nginx si la configuration est OK
+      service:
+        name: nginx
+        state: restarted
+      when: nginx_test.rc == 0

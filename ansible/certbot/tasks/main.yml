@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: MIT-0
+---
+# tasks file for certbot
+
+- name: Installer certbot et plugin nginx
+  apt:
+    name:
+      - certbot
+      - python3-certbot-nginx
+    state: present
+    update_cache: yes
+
+- name: Générer un certificat SSL Let's Encrypt si absent
+  command: >
+    certbot --nginx --non-interactive --agree-tos
+    --email {{ letsencrypt_email }}
+    -d {{ domain_name }}
+  args:
+    creates: "/etc/letsencrypt/live/{{ domain_name }}/fullchain.pem"

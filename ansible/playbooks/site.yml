@@ -9,7 +9,7 @@
     - common
     - docker
 
-- name: Ajoute la clé publique sur la VM
+- name: Ajout de la clé publique sur la VM préprod
   hosts: preprod
   become: true
   tasks:
@@ -18,3 +18,13 @@
         user: issa
         state: present
         key: "{{ lookup('file', 'id_rsa_gcloud.pub') }}"
+
+- name: Configuration VM production avec Certbot
+  hosts: prod
+  become: true
+
+  vars_files:
+    - ../group_vars/prod.yml
+
+  roles:
+    - certbot

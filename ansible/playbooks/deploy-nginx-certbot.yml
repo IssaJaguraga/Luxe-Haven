@@ -1,0 +1,50 @@
+
+- hosts: prod
+  become: true
+
+  vars:
+    domain: luxe-haven.cloud
+    email: issa.jaguraga9@gmail.com
+
+  tasks:
+    - name: Installer Nginx
+      apt:
+        name: nginx
+        state: present
+        update_cache: yes
+
+    - name: Installer Certbot et plugin Nginx
+      apt:
+        name:
+          - certbot
+          - python3-certbot-nginx
+        state: present
+        update_cache: yes
+
+    - name: Copier la config Nginx personnalisée
+      template:
+        src: ../templates/nginx-luxe-haven.conf.j2
+        dest: /etc/nginx/sites-available/{{ domain }}.conf
+      notify: Reload Nginx
+
+    - name: Activer le site Nginx
+      file:
+        src: /etc/nginx/sites-available/{{ domain }}.conf
+        dest: /etc/nginx/sites-enabled/{{ domain }}.conf
+        state: link
+      notify: Reload Nginx
+
+    - name: Obtenir un certificat HTTPS avec Certbot
+      command: >
+        certbot --nginx
+        -d {{ domain }}
+        -d www.{{ domain }}
+        --non-interactive --agree-tos
+        -m {{ email }}
+      notify: Reload Nginx
+
+  handlers:
+    - name: Reload Nginx
+      service:
+        name: nginx
+        state: reloaded
