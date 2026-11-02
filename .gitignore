@@ -94,6 +94,8 @@ infra/.terraform/
 infra/id_rsa.pub
 infra/envs/prod/terraform.tfvars
 
+*.tfplan
+tfplan
 # Docker
 .dockerignore
 
@@ -107,3 +109,7 @@ coverage/
 node_modules
 
 gcp-ssh-key.txt
+
+# Copies de base de données
+*.sql
+!back/init.sql
