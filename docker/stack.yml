@@ -39,7 +39,7 @@ services:
         condition: on-failure
 
   front:
-    image: luxehaven-front:1.0
+    image: ghcr.io/issajaguraga/luxehaven-front:${FRONT_TAG}
     ports:
       - "80:80"
     networks: [frontend]

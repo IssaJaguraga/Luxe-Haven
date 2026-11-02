@@ -25,9 +25,25 @@ jobs:
       - run: npm test
 
   image:
-    name: Construction de l'image Docker
+    name: Construction et publication de l'image
     needs: tests
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    env:
+      IMAGE: ghcr.io/issajaguraga/luxehaven-front:${{ github.sha }}
     steps:
       - uses: actions/checkout@v4
-      - run: docker build -t luxehaven-front:${{ github.sha }} react-front
+      - name: Construction de l'image
+        run: docker build -t $IMAGE react-front
+      - name: Connexion à GHCR
+        if: github.event_name == 'push'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publication de l'image
+        if: github.event_name == 'push'
+        run: docker push $IMAGE
