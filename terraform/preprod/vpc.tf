@@ -10,3 +10,6 @@ resource "google_compute_subnetwork" "luxehaven_subnet" {
   region        = var.region
   network       = google_compute_network.vpc_network.id
 }
+
+
+

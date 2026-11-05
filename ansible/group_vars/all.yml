@@ -5,3 +5,5 @@ deployment_pubkey: |
 
 domain: luxe-haven.cloud
 app_port: 8055
+# Même version de Docker en préproduction et en production
+docker_version: "5:29.8.2-1~ubuntu.22.04~jammy"

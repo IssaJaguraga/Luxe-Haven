@@ -4,9 +4,9 @@ resource "google_compute_firewall" "allow_icmp_ssh" {
   project       = var.project_id
   direction     = "INGRESS"
   priority      = 1000
-  source_ranges = ["0.0.0.0/0"]  # Ouvert temporairement pour test
+  source_ranges = ["${var.my_ip}/32"]
 
-  target_tags   = ["preprod"]
+  target_tags = ["preprod"]
 
   allow {
     protocol = "icmp"
@@ -17,7 +17,7 @@ resource "google_compute_firewall" "allow_icmp_ssh" {
     ports    = ["22"]
   }
 
-  description = "Allow ICMP and SSH from anywhere temporarily for preprod deployment testing"
+  description = "Allow ICMP and SSH only from authorized public IP"
 }
 
 resource "google_compute_firewall" "allow_ssh_from_iap" {
@@ -27,14 +27,14 @@ resource "google_compute_firewall" "allow_ssh_from_iap" {
   direction     = "INGRESS"
   priority      = 1000
   source_ranges = ["35.235.240.0/20"]
-  target_tags   = ["preprod"]
+  target_tags   = ["preprod", "dev"]
 
   allow {
     protocol = "tcp"
     ports    = ["22"]
   }
 
-  description = "Allow SSH from IAP IP range for preprod"
+  description = "Allow SSH from IAP for preprod and dev"
 }
 
 resource "google_compute_firewall" "allow_directus" {
@@ -43,14 +43,16 @@ resource "google_compute_firewall" "allow_directus" {
   project       = var.project_id
   direction     = "INGRESS"
   priority      = 1001
-  source_ranges = ["176.186.175.230/32"]
+  source_ranges = ["${var.my_ip}/32"]
 
-  target_tags   = ["preprod"]
+  target_tags = ["preprod"]
 
   allow {
     protocol = "tcp"
     ports    = ["8055"]
   }
 
-  description = "Allow Directus port 8055 from my IP"
+  description = "Allow Directus port 8055 only from authorized public IP"
 }
+
+

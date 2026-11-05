@@ -1,5 +1,5 @@
-- name: Configuration complète de la VM de préproduction
-  hosts: preprod
+- name: Configuration des VM de préproduction et de production
+  hosts: preprod:prod
   become: true
 
   vars_files:
@@ -8,23 +8,3 @@
   roles:
     - common
     - docker
-
-- name: Ajout de la clé publique sur la VM préprod
-  hosts: preprod
-  become: true
-  tasks:
-    - name: Ajouter la clé publique de déploiement GitHub Actions
-      authorized_key:
-        user: issa
-        state: present
-        key: "{{ lookup('file', 'id_rsa_gcloud.pub') }}"
-
-- name: Configuration VM production avec Certbot
-  hosts: prod
-  become: true
-
-  vars_files:
-    - ../group_vars/prod.yml
-
-  roles:
-    - certbot
