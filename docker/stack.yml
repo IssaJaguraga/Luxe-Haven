@@ -28,6 +28,7 @@ services:
       DB_DATABASE: luxehaven
       DB_USER: directus
       DB_PASSWORD: ${DIRECTUS_DB_PASSWORD}
+      DB_POOL__MIN: "0"
       SECRET: ${DIRECTUS_SECRET}
       ADMIN_EMAIL: ${ADMIN_EMAIL}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
