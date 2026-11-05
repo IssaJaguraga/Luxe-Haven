@@ -1,5 +1,5 @@
 #!/bin/bash
-# Déploie une version du front. Exemple : deploy-front.sh 640462d2dbf236570d8e7ef9be0caa869d65436c
+# Déploie une version du front
 set -e
 
 VERSION=$1
@@ -12,3 +12,6 @@ docker service update --image $IMAGE --update-failure-action rollback luxehaven_
 sleep 5
 curl --fail --silent --output /dev/null http://localhost
 echo "Version $VERSION déployée"
+
+
+
