@@ -41,8 +41,21 @@ services:
 
   front:
     image: ghcr.io/issajaguraga/luxehaven-front:${FRONT_TAG}
+    networks: [frontend]
+    deploy:
+      restart_policy:
+        condition: any
+
+  caddy:
+    image: caddy:2.10-alpine
+    environment:
+      DOMAIN: ${DOMAIN}
     ports:
       - "80:80"
+      - "443:443"
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
     networks: [frontend]
     deploy:
       restart_policy:
@@ -51,6 +64,7 @@ services:
 volumes:
   db_data:
   directus_uploads:
+  caddy_data:
 
 networks:
   frontend:

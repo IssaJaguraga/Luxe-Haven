@@ -1,0 +1,4 @@
+# Adresse du site : ":80" en préproduction (HTTP), le nom de domaine en production (HTTPS automatique)
+{$DOMAIN} {
+	reverse_proxy front:80
+}
