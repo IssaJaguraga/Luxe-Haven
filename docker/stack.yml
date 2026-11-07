@@ -1,6 +1,6 @@
 services:
   db:
-    image: postgres:17-alpine
+    image: postgres:17.11-alpine@sha256:3540c0362c809df084ffac0ae69fe794515f9de92692f02178bcdce0ef0302ac
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
@@ -17,7 +17,7 @@ services:
       retries: 5
     deploy:
       restart_policy:
-        condition: on-failure
+        condition: any
 
   directus:
     image: directus/directus:11.8.0
@@ -37,7 +37,7 @@ services:
     networks: [backend, frontend]
     deploy:
       restart_policy:
-        condition: on-failure
+        condition: any
 
   front:
     image: ghcr.io/issajaguraga/luxehaven-front:${FRONT_TAG}
@@ -46,7 +46,7 @@ services:
     networks: [frontend]
     deploy:
       restart_policy:
-        condition: on-failure
+        condition: any
 
 volumes:
   db_data:
