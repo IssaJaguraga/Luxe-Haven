@@ -78,3 +78,34 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           echo "[localhost]:2222 ${{ vars.DEPLOY_HOST_KEY }}" > ~/.ssh/known_hosts
           ssh -i ~/.ssh/deploy_key -p 2222 deploy@localhost "sudo deploy-front.sh ${{ github.sha }}"
+
+  deploy-prod:
+    name: Déploiement en production
+    needs: deploy
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Connexion à Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WIF_PROVIDER }}
+          service_account: github-deployer@luxehaven-project.iam.gserviceaccount.com
+
+      - name: Installation de gcloud
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Ouverture du tunnel IAP
+        run: |
+          gcloud compute start-iap-tunnel prod-vm 22 --local-host-port=localhost:2222 --zone=europe-west1-b --project=luxehaven-project &
+          sleep 10
+
+      - name: Lancement du script de déploiement
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY_PROD }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          echo "[localhost]:2222 ${{ vars.DEPLOY_HOST_KEY_PROD }}" > ~/.ssh/known_hosts
+          ssh -i ~/.ssh/deploy_key -p 2222 deploy@localhost "sudo deploy-front.sh ${{ github.sha }}"
