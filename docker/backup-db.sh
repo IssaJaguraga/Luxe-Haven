@@ -2,7 +2,7 @@
 # Sauvegarde de la base de Luxe Haven
 set -e
 
-DOSSIER="$HOME/sauvegardes"
+DOSSIER="/var/backups/luxehaven"
 FICHIER="$DOSSIER/luxehaven-$(date +%F).dump"
 mkdir -p "$DOSSIER"
 
