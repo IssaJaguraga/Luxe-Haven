@@ -1,0 +1,26 @@
+groups:
+  - name: luxehaven
+    rules:
+      - alert: ServiceIndisponible
+        expr: probe_success == 0
+        for: 1m
+        annotations:
+          summary: "{{ $labels.instance }} ne répond plus"
+
+      - alert: ProcesseurSature
+        expr: 100 - avg(rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100 > 80
+        for: 5m
+        annotations:
+          summary: "Le processeur est utilisé à plus de 80 %"
+
+      - alert: MemoireSaturee
+        expr: (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) * 100 > 90
+        for: 5m
+        annotations:
+          summary: "La mémoire est utilisée à plus de 90 %"
+
+      - alert: DisquePresquePlein
+        expr: node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"} * 100 < 15
+        for: 5m
+        annotations:
+          summary: "Il reste moins de 15 % d'espace disque"

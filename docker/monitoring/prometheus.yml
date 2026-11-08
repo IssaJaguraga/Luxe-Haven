@@ -1,0 +1,29 @@
+global:
+  scrape_interval: 30s
+  evaluation_interval: 30s
+
+rule_files:
+  - alertes.yml
+
+scrape_configs:
+  # Ressources de la VM (processeur, mémoire, disque)
+  - job_name: serveur
+    static_configs:
+      - targets: ['node-exporter:9100']
+
+  # Disponibilité et temps de réponse du site et de Directus
+  - job_name: disponibilite
+    metrics_path: /probe
+    params:
+      module: [http_2xx]
+    static_configs:
+      - targets:
+          - https://luxe-haven.cloud
+          - http://directus:8055/server/health
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox:9115
